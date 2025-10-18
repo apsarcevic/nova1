@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aleks Test Site</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="/" class="brand">cole big biznis</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/pages/contact.html">Contact</a>
+      <button id="btn-open-modal" class="btn">Open Test Modal</button>
+      <button id="btn-subscribe-push" class="btn-outline">Enable Push</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Home</h1>
+    <p>Minimal statički sajt za testiranje HoodEngage modal/a i push-a.</p>
+
+    <section class="card">
+      <h2>Status</h2>
+      <ul id="status-list">
+        <li>SDK: <span id="sdk-status">not loaded</span></li>
+        <li>Push: <span id="push-status">not requested</span></li>
+        <li>SW: <span id="sw-status">not registered</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© Aleks</small>
+  </footer>
+
+  <!-- Tvoj HoodEngage SDK: zameni URL/atribute po potrebi -->
+  <!-- Primer: <script src="https://cdn.hoodengage.com/sdk.js" data-workspace="..."></script> -->
+  <script src="/hood-config.js"></script>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
