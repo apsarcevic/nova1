@@ -1,0 +1,15 @@
+safe.directory=F:/ComfyUI/custom_nodes/ComfyUI-Impact-Pack
+safe.directory=F:/ComfyUI/custom_nodes/ComfyUI_UltimateSDUpscale
+safe.directory=F:/ComfyUI/custom_nodes/comfyui_wildcards
+safe.directory=F:/ComfyUI/custom_nodes/efficiency-nodes-comfyui
+safe.directory=F:/ComfyUI/custom_nodes/x-flux-comfyui
+safe.directory=F:/ComfyUI/custom_nodes/comfyui-reactor-node
+safe.directory=X:/stable-diffusion-webui-master
+safe.directory=X:\stable-diffusion-webui-master\repositories\BLIP
+safe.directory=X:\stable-diffusion-webui-master\repositories\generative-models
+safe.directory=X:\stable-diffusion-webui-master\repositories\k-diffusion
+safe.directory=X:\stable-diffusion-webui-master\repositories\stable-diffusion-stability-ai
+safe.directory=X:\stable-diffusion-webui-master\repositories\stable-diffusion-webui-assets
+credential.https://huggingface.co.provider=generic
+user.name=apsarcevic
+user.email=aleksandarsarcevic@protonmail.com
