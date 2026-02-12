@@ -1,62 +1,168 @@
 <!doctype html>
 <html lang="en">
 <head>
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PMM74GC8');</script>
-<!-- End Google Tag Manager -->
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aleks Test Site</title>
+  <title>Mini YouTube Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css"/>
 
   <script src="https://sdk.ocmcore.com/sdk/ht-latest.js" data-tag="NjY4LHUxNjdwajQ2vAMxNDY4MjE0NiPd"></script>
-
-  <meta name='impact-site-verification' value='b9b260b1-eaa0-44db-8270-3e7b7d33c23c'>
-
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMM74GC8"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<!-- skimlinks -->
-<script type="text/javascript" src="https://s.skimresources.com/js/296240X1783680.skimlinks.js"></script>
-<!-- skimlinks end -->
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
 
   <header class="site-header">
-    <nav class="nav">
-      <a href="/" class="brand">cole big biznis</a>
-      <a href="/pages/about.html">About</a>
-      <a href="/pages/contact.html">Contact</a>
-      <button id="btn-open-modal" class="btn">Open Test Modal</button>
-      <button id="btn-subscribe-push" class="btn-outline">Enable Push</button>
-    </nav>
+    <div class="nav">
+      <a href="/" class="brand">MiniYouTube</a>
+      <nav class="nav-links">
+        <a href="#features" data-scroll>Features</a>
+        <a href="#pro" data-scroll>Why Pro</a>
+        <a href="#pricing" data-scroll>Pricing</a>
+      </nav>
+      <a class="btn ghost" href="#pricing" data-scroll>Upgrade now</a>
+    </div>
   </header>
 
-  <main class="container">
-    <h1>Big biznis izvolite</h1>
-    <p></p>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Mini YouTube Pro</p>
+        <h1>Stay in the flow with a clean, always-ready mini player.</h1>
+        <p class="lead">
+          MiniYouTube keeps you focused with a lightweight overlay player and fast access to your latest and live subscriptions.
+          Go Pro to unlock advanced controls, layouts, and reliability upgrades.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#pricing" data-scroll>Upgrade now</a>
+          <a class="btn ghost" href="#features" data-scroll>See features</a>
+        </div>
+        <p class="meta">Pay once, receive your license key by email, activate in the extension.</p>
+      </div>
+      <div class="hero-panel">
+        <div class="player-mock">
+          <div class="player-header">
+            <span class="tab active">Latest</span>
+            <span class="tab">Live</span>
+            <span class="vol">Vol 60%</span>
+            <span class="close">×</span>
+          </div>
+          <div class="player-screen">
+            <div class="glow"></div>
+            <div class="screen-text">Mini Player</div>
+          </div>
+          <div class="player-footer">
+            <span class="control">◀</span>
+            <span class="control">▶</span>
+            <span class="control">▶▶</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="card">
-      <h2>Status</h2>
-      <ul id="status-list">
-        <li>SDK: <span id="sdk-status">not loaded</span></li>
-        <li>Push: <span id="push-status">not requested</span></li>
-        <li>SW: <span id="sw-status">not registered</span></li>
-      </ul>
+    <section id="features" class="section">
+      <div class="section-head">
+        <h2>What you get</h2>
+        <p>Fast access to your content without the full YouTube UI.</p>
+      </div>
+      <div class="grid three">
+        <div class="card">
+          <h3>Overlay mini player</h3>
+          <p>Resizable, draggable player that stays out of your way.</p>
+        </div>
+        <div class="card">
+          <h3>Latest + Live tabs</h3>
+          <p>Jump to your most recent uploads or current live streams.</p>
+        </div>
+        <div class="card">
+          <h3>Quick controls</h3>
+          <p>Next, previous, volume, and play/pause in one compact row.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pro" class="section">
+      <div class="section-head">
+        <h2>Why go Pro</h2>
+        <p>Designed for power users who live in the mini player.</p>
+      </div>
+      <div class="grid two">
+        <div class="card highlight">
+          <h3>Pro adds</h3>
+          <p>Smart filters, layout presets, and priority stability updates.</p>
+          <p>Better playback sync and quick access to your favorite channels.</p>
+        </div>
+        <div class="card">
+          <h3>Instant activation</h3>
+          <p>Purchase once, receive a license key by email, activate in seconds.</p>
+          <p>No account needed to start.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section pricing">
+      <div class="section-head">
+        <h2>Upgrade now</h2>
+        <p>One clean purchase, one license key, full Pro access.</p>
+      </div>
+      <div class="pricing-card">
+        <div>
+          <h3>MiniYouTube Pro</h3>
+          <p class="price">Coming soon</p>
+          <p class="fine">Early access pricing and Stripe checkout will be enabled here.</p>
+        </div>
+        <a id="upgrade-cta" class="btn primary" href="#">Upgrade now</a>
+      </div>
+      <div id="cta-toast" class="toast" role="status" aria-live="polite">Checkout opens here soon.</div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>How it works</h2>
+        <p>Simple, low friction, and instant to use.</p>
+      </div>
+      <div class="grid three">
+        <div class="card">
+          <h3>1. Purchase</h3>
+          <p>Click Upgrade now and complete the Stripe checkout.</p>
+        </div>
+        <div class="card">
+          <h3>2. Receive key</h3>
+          <p>Your license key arrives instantly by email.</p>
+        </div>
+        <div class="card">
+          <h3>3. Activate</h3>
+          <p>Paste the key inside the extension and you are Pro.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq">
+      <div class="section-head">
+        <h2>FAQ</h2>
+        <p>Short answers to common questions.</p>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <h3>Does Pro need an account?</h3>
+          <p>No. You only need the license key sent to your email.</p>
+        </div>
+        <div class="card">
+          <h3>What if YouTube changes?</h3>
+          <p>Pro includes priority fixes when layout changes happen.</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <small>Cole Big Biznis</small>
+    <p>MiniYouTube. Focused playback, faster flow.</p>
+    <p class="fine">© 2026 MiniYouTube</p>
   </footer>
+
   <script src="/hood-config.js"></script>
   <script type="module" src="/main.js"></script>
 </body>
