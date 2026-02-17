@@ -8,81 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css"/>
-
-  <script src="https://sdk.ocmcore.com/sdk/ht-latest.js" data-tag="NjY4LHUxNjdwajQ2vAMxNDY4MjE0NiPd"></script>
 </head>
 <body>
-  <div class="bg-orb orb-a"></div>
-  <div class="bg-orb orb-b"></div>
-
-  <header class="site-header">
-    <div class="nav">
-      <a href="/" class="brand">PlayMySubs</a>
-      <a class="nav-link" href="#legal" data-scroll>Legal</a>
-      <button class="btn ghost" data-upgrade>Upgrade now</button>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <p class="eyebrow">Early access</p>
-      <h1>PlayMySubs</h1>
-      <p class="lead">A clean mini player for your subscriptions. Fast, focused, and always in your flow.</p>
-
-      <div class="feature-row" aria-label="Core features">
-        <span class="pill">Overlay player</span>
-        <span class="pill">Latest + live feed</span>
-        <span class="pill">One-click resume</span>
-      </div>
-
-      <div class="cta-row">
-        <button class="btn primary" data-upgrade>Upgrade now</button>
-      </div>
-
-      <p class="meta">playmysubs.com is in progress. Checkout and activation flow is being finalized.</p>
-    </section>
-
-    <section id="legal" class="legal-inline">
-      <p><strong>Terms:</strong> License keys are for individual use and may be periodically verified.</p>
-      <p><strong>Privacy:</strong> We collect only the email required for delivery and key verification.</p>
-    </section>
+  <main class="shell">
+    <p class="eyebrow">PlayMySubs</p>
+    <h1>Coming soon</h1>
+    <p class="lead">A clean way to watch your subscriptions in a focused mini player.</p>
+    <p class="meta">Public launch is in progress.</p>
+    <a class="dev-link" href="https://dev.playmysubs.com">View dev preview</a>
   </main>
-
-  <div class="drawer-overlay" data-drawer-close></div>
-  <aside class="drawer" id="upgrade-drawer" aria-hidden="true" role="dialog" aria-label="Upgrade to Pro">
-    <div class="drawer-header">
-      <div>
-        <p class="eyebrow">Upgrade</p>
-        <h2>Activate PlayMySubs Pro</h2>
-        <p class="drawer-sub">Enter the email where we should send your license key.</p>
-      </div>
-      <button class="icon-btn" data-drawer-close aria-label="Close">x</button>
-    </div>
-
-    <form class="drawer-form" id="upgrade-form">
-      <label class="field">
-        <span>Email</span>
-        <input type="email" name="email" placeholder="you@email.com" required />
-      </label>
-
-      <label class="check">
-        <input type="checkbox" required />
-        <span>I agree to the <a href="#legal" data-scroll>Terms and Privacy</a>.</span>
-      </label>
-
-      <button type="submit" class="btn primary full">Continue to checkout</button>
-      <p class="fine">You will be redirected to Lemon Squeezy Checkout.</p>
-    </form>
-
-    <div class="drawer-toast" id="drawer-toast" role="status" aria-live="polite">Checkout opens here soon.</div>
-  </aside>
-
-  <footer class="site-footer">
-    <p>PlayMySubs</p>
-    <p class="fine">Coming soon on playmysubs.com</p>
-  </footer>
-
-  <script src="/hood-config.js"></script>
-  <script type="module" src="/main.js"></script>
 </body>
 </html>
