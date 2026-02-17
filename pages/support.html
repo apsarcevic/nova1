@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About | PlayMySubs</title>
-  <meta name="description" content="About PlayMySubs, a lightweight mini player for subscription videos." />
+  <title>Support | PlayMySubs</title>
+  <meta name="description" content="Contact PlayMySubs support." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -19,10 +19,22 @@
   </header>
 
   <main class="container page-shell">
-    <p class="eyebrow">About</p>
-    <h1>Built for focused watching.</h1>
-    <p>PlayMySubs is designed for people who want a cleaner way to follow subscription videos without opening full pages every time.</p>
-    <p>Our goal is simple: less friction, faster playback, and stable day-to-day experience.</p>
+    <p class="eyebrow">Support</p>
+    <h1>Need help?</h1>
+    <p>Send us a message and we will respond from <strong>support@playmysubs.com</strong>.</p>
+
+    <form id="support-form" class="stack-form">
+      <label class="field">
+        <span>Your email</span>
+        <input type="email" name="email" placeholder="you@domain.com" required />
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea name="message" rows="6" placeholder="Describe your issue" required></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Send message</button>
+      <p class="fine">This opens your mail app with a prefilled support email.</p>
+    </form>
   </main>
 
   <footer class="site-footer">
@@ -35,5 +47,7 @@
       </nav>
     </div>
   </footer>
+
+  <script src="/main.js" defer></script>
 </body>
 </html>

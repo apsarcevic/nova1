@@ -2,18 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PlayMySubs</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayMySubs | Mini Player for Subscription Videos</title>
+  <meta name="description" content="PlayMySubs helps you watch subscription videos in a clean mini player with less distraction and faster control." />
+  <meta name="keywords" content="subscription mini player, video subscriptions, floating player, playmysubs" />
+  <meta property="og:title" content="PlayMySubs" />
+  <meta property="og:description" content="A clean mini player for your subscription videos." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://playmysubs.com" />
+  <meta name="theme-color" content="#0c111a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <main class="shell">
-    <p class="eyebrow">PlayMySubs</p>
-    <h1>Coming soon</h1>
-    <p class="lead">A clean way to watch your subscriptions in a focused mini player.</p>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/">PlayMySubs</a>
+      <button class="btn btn-ghost" data-upgrade>Upgrade now</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-card">
+      <p class="eyebrow">PlayMySubs</p>
+      <h1>Watch subscriptions in a focused mini player.</h1>
+      <p class="hero-copy">PlayMySubs keeps your videos visible while you work, browse, and stay in flow. Fast controls, clean layout, less noise.</p>
+      <div class="chip-row" aria-label="Highlights">
+        <span class="chip">Floating player</span>
+        <span class="chip">Latest + live</span>
+        <span class="chip">Quick controls</span>
+      </div>
+      <div class="cta-row">
+        <button class="btn btn-primary" data-upgrade>Upgrade now</button>
+      </div>
+    </section>
   </main>
+
+  <div class="drawer-overlay" data-drawer-close></div>
+  <aside class="drawer" id="upgrade-drawer" aria-hidden="true" role="dialog" aria-label="Upgrade to PlayMySubs Pro">
+    <div class="drawer-head">
+      <div>
+        <p class="eyebrow">Upgrade</p>
+        <h2>Unlock PlayMySubs Pro</h2>
+        <p class="muted">Complete checkout in one step and receive your key by email.</p>
+      </div>
+      <button class="icon-btn" aria-label="Close" data-drawer-close>x</button>
+    </div>
+
+    <form id="upgrade-form" class="stack-form">
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" placeholder="you@playmysubs.com" required />
+      </label>
+
+      <label class="agree">
+        <input type="checkbox" required />
+        <span>I agree to the <a href="/pages/privacy.html">Privacy Policy</a>.</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary btn-full">Continue to checkout</button>
+      <p class="fine">You will be redirected to Lemon Squeezy checkout.</p>
+    </form>
+
+    <div id="drawer-toast" class="toast" role="status" aria-live="polite">Checkout link will be enabled here.</div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span class="copyright">© 2026 PlayMySubs</span>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/pages/about.html">About</a>
+        <a href="/pages/privacy.html">Privacy</a>
+        <a href="/pages/support.html">Support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/main.js" defer></script>
 </body>
 </html>
