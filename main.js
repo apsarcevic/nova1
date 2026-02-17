@@ -9,7 +9,7 @@ const lemonSqueezyCheckoutUrl = "";
 const showToast = () => {
   if (!toast) return;
   toast.classList.add("show");
-  window.setTimeout(() => toast.classList.remove("show"), 2400);
+  window.setTimeout(() => toast.classList.remove("show"), 2600);
 };
 
 const openDrawer = () => {
@@ -18,6 +18,7 @@ const openDrawer = () => {
   overlay.classList.add("show");
   drawer.setAttribute("aria-hidden", "false");
   document.body.classList.add("drawer-open");
+
   const input = drawer.querySelector("input[type='email']");
   if (input) input.focus();
 };
@@ -45,7 +46,7 @@ closeButtons.forEach((btn) => {
 });
 
 if (overlay) {
-  overlay.addEventListener("click", () => closeDrawer());
+  overlay.addEventListener("click", closeDrawer);
 }
 
 if (form) {
@@ -73,5 +74,6 @@ document.querySelectorAll("[data-scroll]").forEach((link) => {
     if (!target) return;
     event.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
+    closeDrawer();
   });
 });
