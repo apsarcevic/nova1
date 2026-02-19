@@ -137,6 +137,13 @@ h1 {
   margin-top: 24px;
 }
 
+.trust-line {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .btn {
   border: 1px solid transparent;
   border-radius: 999px;
@@ -168,6 +175,47 @@ h1 {
 
 .btn-full {
   width: 100%;
+}
+
+.grid-section {
+  margin: 18px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.info-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(10, 16, 26, 0.72);
+  padding: 18px;
+}
+
+.info-card h3 {
+  margin: 8px 0 0;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.info-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.pro-strip {
+  margin: 12px auto 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(9, 14, 22, 0.66);
+  padding: 18px;
+}
+
+.pro-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .site-footer {
@@ -375,6 +423,10 @@ h2 {
   .footer-row {
     justify-content: center;
     text-align: center;
+  }
+
+  .grid-section {
+    grid-template-columns: 1fr;
   }
 }
 
