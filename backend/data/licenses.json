@@ -1,0 +1,26 @@
+[
+  {
+    "licenseKey": "PMS-DEMO-ACTIVE-0001",
+    "customerEmail": "demo@playmysubs.com",
+    "plan": "premium",
+    "status": "active",
+    "expiresAt": null,
+    "provider": "manual",
+    "providerCustomerId": null,
+    "providerTransactionId": "txn_demo_active",
+    "createdAt": "2026-03-18T10:00:00.000Z",
+    "updatedAt": "2026-03-18T10:00:00.000Z"
+  },
+  {
+    "licenseKey": "PMS-DEMO-EXPIRED-0002",
+    "customerEmail": "expired@playmysubs.com",
+    "plan": "premium",
+    "status": "expired",
+    "expiresAt": "2026-01-15T23:59:59.000Z",
+    "provider": "manual",
+    "providerCustomerId": null,
+    "providerTransactionId": "txn_demo_expired",
+    "createdAt": "2026-01-01T10:00:00.000Z",
+    "updatedAt": "2026-02-01T10:00:00.000Z"
+  }
+]
