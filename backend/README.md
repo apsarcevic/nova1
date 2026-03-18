@@ -49,6 +49,7 @@ Planned responsibilities:
 - `data/licenses.json`: local test data
 - `scripts/smoke.js`: local smoke run
 - `DEPLOYMENT_PLAN.md`: chosen production stack and rollout order
+- `SETUP_CHECKLIST.md`: exact Supabase + Netlify execution checklist
 
 ## Recommended Production Replacement
 

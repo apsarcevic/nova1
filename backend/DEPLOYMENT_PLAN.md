@@ -36,6 +36,12 @@ Netlify redirects these routes to the function wrappers in `netlify/functions/`.
 
 - `LICENSE_VERIFY_CONFIG.endpoint=https://playmysubs.com/api/license/verify`
 
+## Execution Checklist
+
+Follow:
+
+- [SETUP_CHECKLIST.md](/run/media/alesar/5a8d7f9b-81af-47dd-8912-95bc67eb6ecf/nova1/backend/SETUP_CHECKLIST.md)
+
 ## Database
 
 Run the schema in:
