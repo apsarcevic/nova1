@@ -6,7 +6,8 @@ const closeButtons = document.querySelectorAll('[data-drawer-close]');
 const form = document.getElementById('upgrade-form');
 const supportForm = document.getElementById('support-form');
 
-const lemonSqueezyCheckoutUrl = '';
+const checkoutUrl = '';
+const checkoutProviderName = 'Paddle';
 
 function showToast(message) {
   if (!toast) return;
@@ -56,11 +57,11 @@ if (overlay) {
 if (form) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (lemonSqueezyCheckoutUrl) {
-      window.location.href = lemonSqueezyCheckoutUrl;
+    if (checkoutUrl) {
+      window.location.href = checkoutUrl;
       return;
     }
-    showToast('Checkout link will be enabled here.');
+    showToast(`Checkout is not connected yet. Contact support@playmysubs.com for access while ${checkoutProviderName} is being finalized.`);
   });
 }
 

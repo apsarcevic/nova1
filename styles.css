@@ -184,6 +184,10 @@ h1 {
   gap: 12px;
 }
 
+.pricing-grid {
+  margin-top: 24px;
+}
+
 .info-card {
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -201,6 +205,14 @@ h1 {
   margin: 10px 0 0;
   color: var(--muted);
   line-height: 1.6;
+}
+
+.pricing-card {
+  height: 100%;
+}
+
+.featured-card {
+  background: linear-gradient(160deg, rgba(255, 209, 102, 0.08), rgba(139, 217, 255, 0.05));
 }
 
 .pro-strip {
@@ -407,6 +419,28 @@ h2 {
 .page-shell ul {
   margin: 10px 0;
   padding-left: 18px;
+}
+
+.page-card {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(10, 16, 26, 0.72);
+  padding: 18px;
+}
+
+.page-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.page-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+}
+
+.page-list li + li {
+  margin-top: 8px;
 }
 
 @media (max-width: 1024px) {
