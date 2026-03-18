@@ -25,7 +25,9 @@ Planned responsibilities:
 ## What This Skeleton Is
 
 - local Node modules with small handlers
-- file-based JSON storage for local testing only
+- pluggable storage driver:
+  - `file` for local testing
+  - `supabase` for production deployment
 - smoke script to simulate verify and webhook flows
 
 ## What This Skeleton Is Not
@@ -39,14 +41,18 @@ Planned responsibilities:
 
 - `src/handlers/verifyLicense.js`: verify endpoint logic
 - `src/handlers/paddleWebhook.js`: provider event normalization + upsert flow
-- `src/lib/licenseStore.js`: local JSON record adapter
+- `src/lib/licenseStore.js`: runtime store selector
+- `src/lib/fileLicenseStore.js`: local JSON record adapter
+- `src/lib/supabaseLicenseStore.js`: Supabase REST adapter
 - `src/lib/licenseService.js`: shared business rules
+- `sql/supabase-schema.sql`: starter schema for the production store
 - `data/licenses.json`: local test data
 - `scripts/smoke.js`: local smoke run
+- `DEPLOYMENT_PLAN.md`: chosen production stack and rollout order
 
 ## Recommended Production Replacement
 
-Replace `src/lib/licenseStore.js` with a persistent adapter backed by a real database.
+Production should use `LICENSE_STORE_DRIVER=supabase` and the schema in `sql/supabase-schema.sql`.
 
 Suggested record shape:
 
@@ -71,3 +77,11 @@ Suggested record shape:
 cd nova1
 node backend/scripts/smoke.js
 ```
+
+## Deployment Direction
+
+Current recommended stack:
+
+- Netlify static hosting
+- Netlify Functions for `/api/*`
+- Supabase Postgres via REST for persistent license storage

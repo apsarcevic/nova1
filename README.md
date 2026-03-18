@@ -8,12 +8,14 @@ This repository contains the public PlayMySubs marketing site and the first back
 - pricing, privacy, terms, refund, support, and about pages
 - checkout drawer placeholder for the future Paddle flow
 - backend skeleton under `backend/` for license verification and webhook fulfillment
+- Netlify deployment skeleton for `/api/*` routes under `netlify/functions/`
 
 ## Important Notes
 
 - the live checkout link is still not wired
 - the backend skeleton is local-first and file-backed for development only
-- production deployment should replace the file store with a real database-backed adapter
+- the chosen production direction is Netlify Functions + Supabase REST
+- production still needs real Paddle webhook verification and real checkout wiring
 
 ## Local checks
 

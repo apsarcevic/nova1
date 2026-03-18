@@ -1,9 +1,13 @@
 const { getByLicenseKey, upsert } = require('../lib/licenseStore');
 const { issueOrUpdateFromProviderEvent } = require('../lib/licenseService');
 const { normalizePaddleEvent, verifyPaddleWebhookSignature } = require('../lib/paddle');
-const { badRequest, methodNotAllowed, ok, parseJsonBody, serverError } = require('../lib/http');
+const { badRequest, methodNotAllowed, noContent, ok, parseJsonBody, serverError } = require('../lib/http');
 
 async function handler(event) {
+  if (event.httpMethod === 'OPTIONS') {
+    return noContent();
+  }
+
   if (event.httpMethod !== 'POST') {
     return methodNotAllowed(event.httpMethod);
   }

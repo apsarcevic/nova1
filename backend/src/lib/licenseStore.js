@@ -1,33 +1,24 @@
-const fs = require('fs/promises');
-const path = require('path');
+const fileStore = require('./fileLicenseStore');
+const supabaseStore = require('./supabaseLicenseStore');
 
-const LICENSES_PATH = path.resolve(__dirname, '..', '..', 'data', 'licenses.json');
-
-async function readAll() {
-  const raw = await fs.readFile(LICENSES_PATH, 'utf8');
-  const parsed = JSON.parse(raw);
-  return Array.isArray(parsed) ? parsed : [];
+function getDriver() {
+  return (process.env.LICENSE_STORE_DRIVER || 'file').trim().toLowerCase();
 }
 
-async function writeAll(records) {
-  await fs.writeFile(LICENSES_PATH, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
+function getStore() {
+  const driver = getDriver();
+  if (driver === 'supabase') {
+    return supabaseStore;
+  }
+  return fileStore;
 }
 
 async function getByLicenseKey(licenseKey) {
-  const records = await readAll();
-  return records.find((record) => record.licenseKey === licenseKey) || null;
+  return getStore().getByLicenseKey(licenseKey);
 }
 
 async function upsert(record) {
-  const records = await readAll();
-  const index = records.findIndex((entry) => entry.licenseKey === record.licenseKey);
-  if (index >= 0) {
-    records[index] = record;
-  } else {
-    records.push(record);
-  }
-  await writeAll(records);
-  return record;
+  return getStore().upsert(record);
 }
 
 module.exports = {

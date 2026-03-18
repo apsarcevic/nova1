@@ -1,8 +1,12 @@
 const { getByLicenseKey } = require('../lib/licenseStore');
 const { buildVerifyResult } = require('../lib/licenseService');
-const { badRequest, methodNotAllowed, ok, parseJsonBody, serverError } = require('../lib/http');
+const { badRequest, methodNotAllowed, noContent, ok, parseJsonBody, serverError } = require('../lib/http');
 
 async function handler(event) {
+  if (event.httpMethod === 'OPTIONS') {
+    return noContent();
+  }
+
   if (event.httpMethod !== 'POST') {
     return methodNotAllowed(event.httpMethod);
   }

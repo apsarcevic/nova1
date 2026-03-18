@@ -1,10 +1,27 @@
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS'
+};
+
 function json(statusCode, body) {
   return {
     statusCode,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      ...CORS_HEADERS
     },
     body: JSON.stringify(body, null, 2)
+  };
+}
+
+function noContent() {
+  return {
+    statusCode: 204,
+    headers: {
+      ...CORS_HEADERS
+    },
+    body: ''
   };
 }
 
@@ -34,6 +51,7 @@ function parseJsonBody(event) {
 module.exports = {
   badRequest,
   methodNotAllowed,
+  noContent,
   ok,
   parseJsonBody,
   serverError
