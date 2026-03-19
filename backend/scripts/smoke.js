@@ -37,11 +37,18 @@ async function run() {
     console.log(existing.body);
 
     const webhookPayload = JSON.stringify({
-      customerEmail: 'buyer@playmysubs.com',
-      providerTransactionId: 'txn_paddle_1001',
-      providerCustomerId: 'ctm_1001',
-      plan: 'premium',
-      status: 'active'
+      event_type: 'transaction.completed',
+      data: {
+        id: 'txn_paddle_1001',
+        customer_id: 'ctm_1001',
+        status: 'completed',
+        custom_data: {
+          customerEmail: 'buyer@playmysubs.com',
+          plan: 'premium',
+          product: 'miniyoutube-extension',
+          source: 'playmysubs-website'
+        }
+      }
     });
 
     const created = await paddleWebhook({

@@ -17,11 +17,16 @@ async function getByLicenseKey(licenseKey) {
   return getStore().getByLicenseKey(licenseKey);
 }
 
+async function getByProviderTransactionId(providerTransactionId) {
+  return getStore().getByProviderTransactionId(providerTransactionId);
+}
+
 async function upsert(record) {
   return getStore().upsert(record);
 }
 
 module.exports = {
   getByLicenseKey,
+  getByProviderTransactionId,
   upsert
 };

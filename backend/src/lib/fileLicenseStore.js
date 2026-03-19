@@ -18,6 +18,11 @@ async function getByLicenseKey(licenseKey) {
   return records.find((record) => record.licenseKey === licenseKey) || null;
 }
 
+async function getByProviderTransactionId(providerTransactionId) {
+  const records = await readAll();
+  return records.find((record) => record.providerTransactionId === providerTransactionId) || null;
+}
+
 async function upsert(record) {
   const records = await readAll();
   const index = records.findIndex((entry) => entry.licenseKey === record.licenseKey);
@@ -32,5 +37,6 @@ async function upsert(record) {
 
 module.exports = {
   getByLicenseKey,
+  getByProviderTransactionId,
   upsert
 };

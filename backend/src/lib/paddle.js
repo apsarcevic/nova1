@@ -48,18 +48,55 @@ function safeCompareHex(expectedHex, candidateHex) {
   return crypto.timingSafeEqual(expected, candidate);
 }
 
+function deriveLicenseStatus(eventType, transactionStatus, customData) {
+  const explicitStatus = customData.status || customData.licenseStatus || '';
+  if (explicitStatus) {
+    return explicitStatus;
+  }
+
+  const normalizedEventType = String(eventType || '').toLowerCase();
+  const normalizedTransactionStatus = String(transactionStatus || '').toLowerCase();
+
+  if (normalizedEventType === 'transaction.completed') {
+    return 'active';
+  }
+
+  if (normalizedEventType === 'transaction.paid') {
+    return 'active';
+  }
+
+  if (normalizedTransactionStatus === 'completed' || normalizedTransactionStatus === 'paid' || normalizedTransactionStatus === 'billed') {
+    return 'active';
+  }
+
+  if (normalizedTransactionStatus === 'past_due') {
+    return 'past_due';
+  }
+
+  if (normalizedTransactionStatus === 'canceled') {
+    return 'canceled';
+  }
+
+  return normalizedTransactionStatus || 'pending';
+}
+
 function normalizePaddleEvent(payload) {
   if (!payload || typeof payload !== 'object') {
     throw new Error('Webhook payload is required.');
   }
 
+  const eventType = payload.event_type || payload.eventType || '';
   const transactionData = payload.data && typeof payload.data === 'object' ? payload.data : null;
   const customData = transactionData && transactionData.custom_data && typeof transactionData.custom_data === 'object'
     ? transactionData.custom_data
     : {};
+  const customer = transactionData && transactionData.customer && typeof transactionData.customer === 'object'
+    ? transactionData.customer
+    : null;
 
   const customerEmail = payload.customerEmail
     || payload.customer_email
+    || (customer ? customer.email : '')
     || customData.customerEmail
     || customData.customer_email
     || '';
@@ -74,13 +111,14 @@ function normalizePaddleEvent(payload) {
   }
 
   return {
+    eventType,
     provider: 'paddle',
     licenseKey: payload.licenseKey || payload.license_key || customData.licenseKey || customData.license_key || '',
     customerEmail,
     providerCustomerId: payload.providerCustomerId || payload.provider_customer_id || (transactionData ? transactionData.customer_id : null) || null,
     providerTransactionId,
     plan: payload.plan || customData.plan || 'premium',
-    status: payload.status || (transactionData ? transactionData.status : null) || 'active',
+    status: deriveLicenseStatus(eventType, payload.status || (transactionData ? transactionData.status : null), customData),
     expiresAt: payload.expiresAt || payload.expires_at || customData.expiresAt || customData.expires_at || null
   };
 }

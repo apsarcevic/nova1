@@ -70,6 +70,17 @@ async function getByLicenseKey(licenseKey) {
   return mapDbRecordToLicense(data[0]);
 }
 
+async function getByProviderTransactionId(providerTransactionId) {
+  const { table } = getSupabaseConfig();
+  const data = await request(
+    `/rest/v1/${table}?provider_transaction_id=eq.${encodeURIComponent(providerTransactionId)}&select=*`
+  );
+  if (!Array.isArray(data) || !data.length) {
+    return null;
+  }
+  return mapDbRecordToLicense(data[0]);
+}
+
 async function upsert(record) {
   const { table } = getSupabaseConfig();
   const payload = mapLicenseToDbRecord(record);
@@ -85,5 +96,6 @@ async function upsert(record) {
 
 module.exports = {
   getByLicenseKey,
+  getByProviderTransactionId,
   upsert
 };
