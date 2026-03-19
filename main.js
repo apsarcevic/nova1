@@ -5,9 +5,10 @@ const upgradeButtons = document.querySelectorAll('[data-upgrade]');
 const closeButtons = document.querySelectorAll('[data-drawer-close]');
 const form = document.getElementById('upgrade-form');
 const supportForm = document.getElementById('support-form');
+const paddleConfig = window.PLAYMYSUBS_PADDLE_CONFIG || {};
 
-const checkoutUrl = '';
 const checkoutProviderName = 'Paddle';
+let paddleInitialized = false;
 
 function showToast(message) {
   if (!toast) return;
@@ -36,6 +37,75 @@ function closeDrawer() {
   document.body.classList.remove('drawer-open');
 }
 
+function getCheckoutReadiness() {
+  return {
+    hasScript: typeof window.Paddle !== 'undefined',
+    hasClientToken: typeof paddleConfig.clientToken === 'string' && paddleConfig.clientToken.trim().length > 0,
+    hasPriceId: typeof paddleConfig.priceId === 'string' && paddleConfig.priceId.trim().length > 0
+  };
+}
+
+function initializePaddle() {
+  const readiness = getCheckoutReadiness();
+  if (!readiness.hasScript || !readiness.hasClientToken) {
+    return false;
+  }
+
+  if (paddleInitialized) {
+    return true;
+  }
+
+  if (paddleConfig.environment === 'sandbox' && window.Paddle.Environment) {
+    window.Paddle.Environment.set('sandbox');
+  }
+
+  window.Paddle.Initialize({
+    token: paddleConfig.clientToken.trim()
+  });
+  paddleInitialized = true;
+  return true;
+}
+
+function openPaddleCheckout(email) {
+  const readiness = getCheckoutReadiness();
+  if (!readiness.hasScript) {
+    showToast('Paddle.js is not loaded yet.');
+    return;
+  }
+  if (!readiness.hasClientToken || !readiness.hasPriceId) {
+    showToast('Checkout is not fully configured yet. Add the Paddle client token and price ID first.');
+    return;
+  }
+  if (!initializePaddle()) {
+    showToast('Unable to initialize Paddle checkout.');
+    return;
+  }
+
+  window.Paddle.Checkout.open({
+    items: [
+      {
+        priceId: paddleConfig.priceId.trim(),
+        quantity: 1
+      }
+    ],
+    customer: {
+      email
+    },
+    customData: {
+      customerEmail: email,
+      plan: 'premium',
+      product: 'miniyoutube-extension',
+      source: 'playmysubs-website'
+    },
+    settings: {
+      displayMode: 'overlay',
+      locale: paddleConfig.locale || 'en',
+      theme: paddleConfig.theme || 'light',
+      successUrl: paddleConfig.successUrl || `${window.location.origin}/?checkout=success`
+    }
+  });
+}
+
 upgradeButtons.forEach((button) => {
   button.addEventListener('click', (event) => {
     event.preventDefault();
@@ -57,11 +127,13 @@ if (overlay) {
 if (form) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (checkoutUrl) {
-      window.location.href = checkoutUrl;
+    const emailInput = form.querySelector('input[name="email"]');
+    const email = emailInput ? emailInput.value.trim() : '';
+    if (!email) {
+      showToast('Enter your email first.');
       return;
     }
-    showToast(`Checkout is not connected yet. Contact support@playmysubs.com for access while ${checkoutProviderName} is being finalized.`);
+    openPaddleCheckout(email);
   });
 }
 
@@ -81,3 +153,9 @@ if (supportForm) {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeDrawer();
 });
+
+if (window.location.search.includes('checkout=success')) {
+  window.setTimeout(() => {
+    showToast(`Checkout completed. Watch your inbox for your ${checkoutProviderName} receipt and license delivery.`);
+  }, 200);
+}

@@ -16,6 +16,7 @@ This repository contains the public PlayMySubs marketing site and the first back
 - the backend skeleton is local-first and file-backed for development only
 - the chosen production direction is Netlify Functions + Supabase REST
 - production still needs real Paddle webhook verification and real checkout wiring
+- `paddle-config.js` now contains the frontend checkout placeholders that still need a real Paddle `clientToken` and `priceId`
 
 ## Local checks
 
