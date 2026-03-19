@@ -77,6 +77,7 @@ In Netlify, add these environment variables:
 - `SUPABASE_SERVICE_ROLE_KEY=<your service role key>`
 - `SUPABASE_LICENSES_TABLE=licenses`
 - `PADDLE_WEBHOOK_SECRET=<leave placeholder until Paddle is configured>`
+- `PADDLE_WEBHOOK_TOLERANCE_SECONDS=300`
 - `LICENSE_KEY_PREFIX=PMS`
 
 Optional:

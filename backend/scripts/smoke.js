@@ -1,14 +1,29 @@
+const crypto = require('crypto');
 const fs = require('fs/promises');
 const path = require('path');
 const { handler: verifyLicense } = require('../src/handlers/verifyLicense');
 const { handler: paddleWebhook } = require('../src/handlers/paddleWebhook');
 
 const licensesPath = path.resolve(__dirname, '..', 'data', 'licenses.json');
+const webhookSecret = 'smoke-test-secret';
+
+function signPayload(rawBody) {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const digest = crypto
+    .createHmac('sha256', webhookSecret)
+    .update(`${timestamp}:${rawBody}`, 'utf8')
+    .digest('hex');
+
+  return `ts=${timestamp};h1=${digest}`;
+}
 
 async function run() {
   const originalSeed = await fs.readFile(licensesPath, 'utf8');
+  const previousSecret = process.env.PADDLE_WEBHOOK_SECRET;
 
   try {
+    process.env.PADDLE_WEBHOOK_SECRET = webhookSecret;
+
     const existing = await verifyLicense({
       httpMethod: 'POST',
       body: JSON.stringify({
@@ -21,15 +36,20 @@ async function run() {
     console.log('Verify active demo:');
     console.log(existing.body);
 
+    const webhookPayload = JSON.stringify({
+      customerEmail: 'buyer@playmysubs.com',
+      providerTransactionId: 'txn_paddle_1001',
+      providerCustomerId: 'ctm_1001',
+      plan: 'premium',
+      status: 'active'
+    });
+
     const created = await paddleWebhook({
       httpMethod: 'POST',
-      body: JSON.stringify({
-        customerEmail: 'buyer@playmysubs.com',
-        providerTransactionId: 'txn_paddle_1001',
-        providerCustomerId: 'ctm_1001',
-        plan: 'premium',
-        status: 'active'
-      })
+      headers: {
+        'Paddle-Signature': signPayload(webhookPayload)
+      },
+      body: webhookPayload
     });
 
     console.log('\nWebhook create/update:');
@@ -48,6 +68,11 @@ async function run() {
     console.log('\nVerify created license:');
     console.log(verifyCreated.body);
   } finally {
+    if (previousSecret) {
+      process.env.PADDLE_WEBHOOK_SECRET = previousSecret;
+    } else {
+      delete process.env.PADDLE_WEBHOOK_SECRET;
+    }
     await fs.writeFile(licensesPath, originalSeed, 'utf8');
   }
 }

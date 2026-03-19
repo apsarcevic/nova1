@@ -45,7 +45,10 @@ function parseJsonBody(event) {
   if (!event || typeof event.body !== 'string' || !event.body.trim()) {
     return {};
   }
-  return JSON.parse(event.body);
+  const rawBody = event.isBase64Encoded
+    ? Buffer.from(event.body, 'base64').toString('utf8')
+    : event.body;
+  return JSON.parse(rawBody);
 }
 
 module.exports = {

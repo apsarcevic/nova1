@@ -31,6 +31,7 @@ Netlify redirects these routes to the function wrappers in `netlify/functions/`.
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `SUPABASE_LICENSES_TABLE=licenses`
 - `PADDLE_WEBHOOK_SECRET`
+- `PADDLE_WEBHOOK_TOLERANCE_SECONDS=300`
 
 ### Extension
 
