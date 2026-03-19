@@ -67,7 +67,7 @@
         </ul>
       </article>
 
-      <article class="info-card pricing-card featured-card">
+      <article class="info-card pricing-card featured-card clickable-card" data-upgrade role="button" tabindex="0" aria-label="Buy Premium">
         <div class="pricing-card-top">
           <div>
             <p class="eyebrow">Premium</p>
@@ -93,6 +93,15 @@
     <section class="page-card">
       <h3>Purchase flow</h3>
       <p>Premium is currently priced at <strong>$5 as a one-time purchase</strong>. After checkout, the customer receives a license key by email and pastes it into the extension to unlock Premium features.</p>
+    </section>
+
+    <section class="page-card pricing-cta-card">
+      <h3>Ready to unlock Premium?</h3>
+      <p>Go straight to secure checkout, or review support and policy details first.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" type="button" data-upgrade>Buy Premium</button>
+        <a class="btn btn-ghost" href="/pages/support.html">Questions?</a>
+      </div>
     </section>
 
     <section class="page-card">
@@ -165,5 +174,39 @@
       </nav>
     </div>
   </footer>
+
+  <div class="drawer-overlay" data-drawer-close></div>
+  <aside class="drawer" id="upgrade-drawer" aria-hidden="true" role="dialog" aria-label="Upgrade to PlayMySubs Premium">
+    <div class="drawer-head">
+      <div>
+        <p class="eyebrow">Upgrade</p>
+        <h2>Unlock PlayMySubs Premium</h2>
+        <p class="muted">Complete a $5 one-time checkout and receive your PlayMySubs license key by email.</p>
+      </div>
+      <button class="icon-btn" aria-label="Close" data-drawer-close>x</button>
+    </div>
+
+    <form id="upgrade-form" class="stack-form">
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" placeholder="you@playmysubs.com" required />
+      </label>
+
+      <label class="agree">
+        <input type="checkbox" required />
+        <span>I agree to the <a href="/terms.html">Terms</a> and <a href="/privacy.html">Privacy Policy</a>.</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary btn-full">Continue to checkout</button>
+      <p class="fine">You will be redirected to a secure $5 one-time checkout when billing is enabled.</p>
+      <p class="fine">Your license key is used inside the extension to activate Premium features.</p>
+    </form>
+
+    <div id="drawer-toast" class="toast" role="status" aria-live="polite">Checkout link will be enabled here.</div>
+  </aside>
+
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script src="/paddle-config.js"></script>
+  <script src="/main.js" defer></script>
 </body>
 </html>

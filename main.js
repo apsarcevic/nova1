@@ -3,6 +3,7 @@ const drawer = document.getElementById('upgrade-drawer');
 const overlay = document.querySelector('.drawer-overlay');
 const upgradeButtons = document.querySelectorAll('[data-upgrade]');
 const closeButtons = document.querySelectorAll('[data-drawer-close]');
+const clickableUpgradeCards = document.querySelectorAll('.clickable-card[data-upgrade]');
 const form = document.getElementById('upgrade-form');
 const supportForm = document.getElementById('support-form');
 const paddleConfig = window.PLAYMYSUBS_PADDLE_CONFIG || {};
@@ -111,6 +112,27 @@ upgradeButtons.forEach((button) => {
     event.preventDefault();
     openDrawer();
   });
+  if (button.tagName !== 'BUTTON' && button.tagName !== 'A') {
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openDrawer();
+      }
+    });
+  }
+});
+
+clickableUpgradeCards.forEach((card) => {
+  card.addEventListener('click', (event) => {
+    event.preventDefault();
+    openDrawer();
+  });
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openDrawer();
+    }
+  });
 });
 
 closeButtons.forEach((button) => {
@@ -153,6 +175,12 @@ if (supportForm) {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeDrawer();
 });
+
+if (window.location.search.includes('checkout=open')) {
+  window.setTimeout(() => {
+    openDrawer();
+  }, 120);
+}
 
 if (window.location.search.includes('checkout=success')) {
   window.setTimeout(() => {
