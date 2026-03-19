@@ -146,7 +146,7 @@ if (supportForm) {
     const message = messageInput ? messageInput.value.trim() : '';
     const subject = encodeURIComponent('PlayMySubs Support Request');
     const body = encodeURIComponent(`From: ${email}\n\n${message}`);
-    window.location.href = `mailto:support@playmysubs.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@playmysubs.com?subject=${subject}&body=${body}`;
   });
 }
 

@@ -479,6 +479,13 @@ h2 {
   padding: 18px;
 }
 
+.legal-meta {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .page-card h3 {
   margin: 0;
   font-size: 20px;
