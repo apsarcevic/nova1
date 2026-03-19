@@ -510,6 +510,29 @@ h1 {
   justify-content: center;
 }
 
+.pricing-proof-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.proof-card-inline {
+  margin-top: 0;
+  min-height: 100%;
+}
+
+.proof-card-inline strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 26px;
+  line-height: 1.05;
+}
+
+.proof-card-inline p {
+  margin-top: 10px;
+}
+
 .info-card {
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -798,6 +821,55 @@ h2 {
   padding: 18px;
 }
 
+.comparison-table {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(120px, 0.8fr) minmax(120px, 0.8fr);
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.comparison-row + .comparison-row {
+  border-top: 1px solid var(--line);
+}
+
+.comparison-head {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.comparison-head span {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.comparison-row span {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.comparison-row span:first-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.faq-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
 .legal-meta {
   margin: 10px 0 0;
   color: var(--muted);
@@ -827,7 +899,9 @@ h2 {
   .hero-grid,
   .final-cta,
   .architecture-grid,
-  .proof-strip {
+  .proof-strip,
+  .pricing-proof-grid,
+  .faq-grid {
     grid-template-columns: 1fr;
     flex-direction: column;
   }
@@ -848,7 +922,9 @@ h2 {
   .proof-strip,
   .steps-grid,
   .architecture-grid,
-  .final-cta {
+  .final-cta,
+  .pricing-proof-grid,
+  .faq-grid {
     grid-template-columns: 1fr;
   }
 
@@ -874,6 +950,15 @@ h2 {
   .pricing-grid {
     grid-template-columns: 1fr;
     max-width: 100%;
+  }
+
+  .comparison-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .comparison-head {
+    display: none;
   }
 }
 
