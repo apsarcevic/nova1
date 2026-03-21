@@ -214,7 +214,7 @@ if (window.location.search.includes('checkout=open')) {
 
 if (window.location.search.includes('checkout=success')) {
   window.setTimeout(() => {
-    showToast(`Checkout completed. Watch your inbox for your ${checkoutProviderName} receipt and license delivery.`);
+    showToast(`Payment completed. Check your checkout email for your PlayMySubs license key, then open the extension and click Premium > Enter License.`);
   }, 200);
 }
 

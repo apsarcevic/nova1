@@ -48,6 +48,22 @@ function safeCompareHex(expectedHex, candidateHex) {
   return crypto.timingSafeEqual(expected, candidate);
 }
 
+function getTransactionData(payload) {
+  if (!payload || typeof payload !== 'object') {
+    return null;
+  }
+  if (payload.data && typeof payload.data === 'object') {
+    return payload.data;
+  }
+  if (payload.payload && typeof payload.payload === 'object') {
+    if (payload.payload.data && typeof payload.payload.data === 'object') {
+      return payload.payload.data;
+    }
+    return payload.payload;
+  }
+  return null;
+}
+
 function deriveLicenseStatus(eventType, transactionStatus, customData) {
   const explicitStatus = customData.status || customData.licenseStatus || '';
   if (explicitStatus) {
@@ -57,11 +73,7 @@ function deriveLicenseStatus(eventType, transactionStatus, customData) {
   const normalizedEventType = String(eventType || '').toLowerCase();
   const normalizedTransactionStatus = String(transactionStatus || '').toLowerCase();
 
-  if (normalizedEventType === 'transaction.completed') {
-    return 'active';
-  }
-
-  if (normalizedEventType === 'transaction.paid') {
+  if (normalizedEventType === 'transaction.completed' || normalizedEventType === 'transaction.paid') {
     return 'active';
   }
 
@@ -85,17 +97,22 @@ function normalizePaddleEvent(payload) {
     throw new Error('Webhook payload is required.');
   }
 
-  const eventType = payload.event_type || payload.eventType || '';
-  const transactionData = payload.data && typeof payload.data === 'object' ? payload.data : null;
+  const eventType = payload.event_type || payload.eventType || (payload.payload && payload.payload.event_type) || '';
+  const transactionData = getTransactionData(payload);
   const customData = transactionData && transactionData.custom_data && typeof transactionData.custom_data === 'object'
     ? transactionData.custom_data
     : {};
   const customer = transactionData && transactionData.customer && typeof transactionData.customer === 'object'
     ? transactionData.customer
     : null;
+  const billingDetails = transactionData && transactionData.billing_details && typeof transactionData.billing_details === 'object'
+    ? transactionData.billing_details
+    : null;
 
   const customerEmail = payload.customerEmail
     || payload.customer_email
+    || (transactionData ? transactionData.customer_email : '')
+    || (billingDetails ? billingDetails.email : '')
     || (customer ? customer.email : '')
     || customData.customerEmail
     || customData.customer_email
@@ -115,7 +132,11 @@ function normalizePaddleEvent(payload) {
     provider: 'paddle',
     licenseKey: payload.licenseKey || payload.license_key || customData.licenseKey || customData.license_key || '',
     customerEmail,
-    providerCustomerId: payload.providerCustomerId || payload.provider_customer_id || (transactionData ? transactionData.customer_id : null) || null,
+    providerCustomerId: payload.providerCustomerId
+      || payload.provider_customer_id
+      || (transactionData ? transactionData.customer_id : null)
+      || (customer ? customer.id : null)
+      || null,
     providerTransactionId,
     plan: payload.plan || customData.plan || 'premium',
     status: deriveLicenseStatus(eventType, payload.status || (transactionData ? transactionData.status : null), customData),

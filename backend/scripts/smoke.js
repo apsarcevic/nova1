@@ -37,11 +37,18 @@ async function run() {
     console.log(existing.body);
 
     const webhookPayload = JSON.stringify({
+      notification_id: 'ntf_1001',
+      event_id: 'evt_1001',
       event_type: 'transaction.completed',
+      occurred_at: new Date().toISOString(),
       data: {
         id: 'txn_paddle_1001',
         customer_id: 'ctm_1001',
         status: 'completed',
+        billing_details: {
+          email: 'buyer@playmysubs.com',
+          name: 'PlayMySubs Buyer'
+        },
         custom_data: {
           customerEmail: 'buyer@playmysubs.com',
           plan: 'premium',
