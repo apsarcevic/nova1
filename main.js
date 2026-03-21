@@ -11,6 +11,36 @@ const paddleConfig = window.PLAYMYSUBS_PADDLE_CONFIG || {};
 const checkoutProviderName = 'Paddle';
 let paddleInitialized = false;
 
+function wirePriorityPreview() {
+  const list = document.querySelector('[data-priority-list]');
+  if (!list) return;
+
+  const updateLabels = () => {
+    [...list.querySelectorAll('.queue-item-hero')].forEach((row, index) => {
+      const label = row.querySelector('span');
+      if (label) label.textContent = `Priority #${index + 1}`;
+    });
+  };
+
+  list.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-move]');
+    if (!button) return;
+
+    const row = button.closest('.queue-item-hero');
+    if (!row) return;
+
+    if (button.dataset.move === 'up' && row.previousElementSibling && row.previousElementSibling.classList.contains('queue-item-hero')) {
+      list.insertBefore(row, row.previousElementSibling);
+    }
+
+    if (button.dataset.move === 'down' && row.nextElementSibling && row.nextElementSibling.classList.contains('queue-item-hero')) {
+      list.insertBefore(row.nextElementSibling, row);
+    }
+
+    updateLabels();
+  });
+}
+
 function showToast(message) {
   if (!toast) return;
   toast.textContent = message;
@@ -187,3 +217,5 @@ if (window.location.search.includes('checkout=success')) {
     showToast(`Checkout completed. Watch your inbox for your ${checkoutProviderName} receipt and license delivery.`);
   }, 200);
 }
+
+wirePriorityPreview();

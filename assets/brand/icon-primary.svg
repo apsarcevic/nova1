@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD166"></stop>
+      <stop offset="50%" stop-color="#F5B942"></stop>
+      <stop offset="100%" stop-color="#D99A2B"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="32" y="32" width="448" height="448" rx="96" fill="#0B0B0D"></rect>
+
+  <!-- Plus -->
+  <g fill="url(#goldGradient)">
+    <rect x="208" y="120" width="96" height="272" rx="48"></rect>
+    <rect x="120" y="208" width="272" height="96" rx="48"></rect>
+  </g>
+
+  <!-- Play triangle -->
+  <polygon points="220,190 340,256 220,322" fill="#0B0B0D"></polygon>
+</svg>

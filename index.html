@@ -10,21 +10,24 @@
   <meta property="og:description" content="A focused mini player for YouTube subscriptions with premium queue controls." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://playmysubs.com" />
-  <meta name="theme-color" content="#0c111a" />
+  <meta name="theme-color" content="#0B0B0D" />
+  <link rel="icon" type="image/svg+xml" href="/assets/brand/icon-primary.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav-wrap">
-      <a class="brand" href="/">PlayMySubs</a>
+      <a class="brand" href="/">
+        <img src="/assets/brand/logo-horizontal.svg" alt="PlayMySubs" />
+      </a>
       <nav class="nav-links-mini" aria-label="Main">
         <a href="/pricing.html">Pricing</a>
         <a href="/pages/support.html">Support</a>
       </nav>
-      <button class="btn btn-ghost" data-upgrade>Upgrade now</button>
+      <button class="btn btn-ghost" data-upgrade>View Plans</button>
     </div>
   </header>
 
@@ -32,72 +35,78 @@
     <section class="hero-card">
       <div class="hero-grid">
         <div class="hero-copy-wrap">
-          <p class="eyebrow">PlayMySubs</p>
-          <h1>Turn your YouTube subscriptions into a clean TV-style queue.</h1>
-          <p class="hero-copy">PlayMySubs keeps your subscription feed playable in a floating mini player so you can watch Live and Latest videos without bouncing through full YouTube pages. Premium adds favorites, smarter queue control, and license-based activation.</p>
+          <p class="eyebrow">Watch Only What You Follow</p>
+          <h1>Watch your YouTube subscriptions without the algorithm.</h1>
+          <p class="hero-copy">Keep Live and Latest in one clean player. Watch only the channels you follow, without homepage clutter or recommendation loops.</p>
+          <div class="cta-row hero-cta-row">
+            <button class="btn btn-primary btn-hero" data-upgrade>Get Premium ($5 one-time)</button>
+            <a class="btn btn-ghost btn-hero" href="/pricing.html">Use free version</a>
+          </div>
           <div class="chip-row" aria-label="Highlights">
-            <span class="chip">Floating player overlay</span>
-            <span class="chip">Latest + Live tabs</span>
-            <span class="chip">Favorites + hidden channels</span>
-            <span class="chip">$5 one-time premium</span>
+            <span class="chip">One-time payment</span>
+            <span class="chip">No subscription</span>
+            <span class="chip">Instant activation</span>
           </div>
-          <div class="cta-row">
-            <button class="btn btn-primary" data-upgrade>Upgrade now</button>
-            <a class="btn btn-ghost" href="/pricing.html">See plans</a>
-          </div>
-          <p class="trust-line">Browser extension • License key delivery by email • Support via hello@playmysubs.com</p>
         </div>
 
         <div class="hero-showcase" aria-label="Product preview">
           <div class="showcase-window">
-            <div class="showcase-toolbar">
-              <span></span>
-              <span></span>
-              <span></span>
+            <div class="showcase-topline">
+              <span class="eyebrow">Premium Preview</span>
+              <span class="eyebrow">Queue Control</span>
             </div>
             <div class="showcase-screen">
-              <div class="screen-topline">
-                <span class="screen-badge">LIVE + LATEST</span>
-                <span class="screen-badge screen-badge-accent">PREMIUM READY</span>
-              </div>
-              <div class="screen-title">A lean playback layer for people who actually use subscriptions.</div>
-              <div class="screen-player">
-                <div class="screen-video">
-                  <div class="video-tag">NOW PLAYING</div>
-                  <div class="video-meta">
+              <div class="queue-card queue-card-premium" data-priority-list>
+                <div class="queue-card-head">
+                  <strong>Favorite Queue</strong>
+                  <span>Priority order</span>
+                </div>
+                <div class="queue-item queue-item-hero">
+                  <div>
                     <strong>MrBeast</strong>
-                    <span>Priority queue • latest feed</span>
+                    <span>Priority #1</span>
+                  </div>
+                  <div class="queue-controls">
+                    <button type="button" aria-label="Move up" data-move="up">↑</button>
+                    <button type="button" aria-label="Move down" data-move="down">↓</button>
                   </div>
                 </div>
-                <div class="queue-card">
-                  <div class="queue-title">Queue control</div>
-                  <div class="queue-item queue-item-active">
-                    <span>1</span>
-                    <strong>MrBeast</strong>
+                <div class="queue-item queue-item-hero">
+                  <div>
+                    <strong>MKBHD</strong>
+                    <span>Priority #2</span>
                   </div>
-                  <div class="queue-item">
-                    <span>2</span>
-                    <strong>Marques Brownlee</strong>
+                  <div class="queue-controls">
+                    <button type="button" aria-label="Move up" data-move="up">↑</button>
+                    <button type="button" aria-label="Move down" data-move="down">↓</button>
                   </div>
-                  <div class="queue-item">
-                    <span>3</span>
+                </div>
+                <div class="queue-item queue-item-hero">
+                  <div>
                     <strong>Kurzgesagt</strong>
+                    <span>Priority #3</span>
+                  </div>
+                  <div class="queue-controls">
+                    <button type="button" aria-label="Move up" data-move="up">↑</button>
+                    <button type="button" aria-label="Move down" data-move="down">↓</button>
                   </div>
                 </div>
+                <div class="hero-toggle-row">
+                  <span class="hero-toggle-pill">
+                    <span class="hero-toggle-box" aria-hidden="true"></span>
+                    <span>Surf mode</span>
+                    <span class="hero-info" title="Automatically moves to the next available video when the current one ends.">i</span>
+                  </span>
+                  <span class="hero-toggle-pill">
+                    <span class="hero-toggle-box" aria-hidden="true"></span>
+                    <span>Priority start</span>
+                    <span class="hero-info" title="Starts playback from the highest-priority favorite channel when there is a match.">i</span>
+                  </span>
+                </div>
               </div>
-              <div class="mini-stats">
-                <div class="mini-stat">
-                  <span class="mini-stat-label">Mode</span>
-                  <span class="mini-stat-value">Surf On</span>
-                </div>
-                <div class="mini-stat">
-                  <span class="mini-stat-label">Plan</span>
-                  <span class="mini-stat-value">Premium</span>
-                </div>
-                <div class="mini-stat">
-                  <span class="mini-stat-label">Delivery</span>
-                  <span class="mini-stat-value">License key</span>
-                </div>
+              <div class="hero-note">
+                <strong>Shape the queue your way.</strong>
+                <p>Add favorite channels, tune playback order, and make the feed behave more like your own TV lineup than a recommendation engine.</p>
               </div>
             </div>
           </div>
@@ -169,7 +178,7 @@
             <li>Volume control and lightweight playback</li>
           </ul>
         </article>
-        <article class="info-card architecture-card architecture-card-featured">
+        <article class="info-card architecture-card architecture-card-featured clickable-card" data-upgrade tabindex="0">
           <p class="eyebrow">Premium</p>
           <h3>Queue intelligence</h3>
           <p>For people who check subscriptions every day and want less manual skipping, less feed noise, and faster playback control.</p>
