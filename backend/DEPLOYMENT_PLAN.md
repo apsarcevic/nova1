@@ -1,59 +1,45 @@
 # Deployment Plan
 
-This is the current production direction for PlayMySubs.
+## Current Decision
+PlayMySubs runs as a Cloudflare Pages project.
 
-## Chosen Stack
+Chosen stack:
+- Static site hosting: `Cloudflare Pages`
+- DNS: `Cloudflare`
+- Persistent data: `Supabase`
+- Payments: `Paddle`
 
-- Static site: Cloudflare Pages
-- DNS: Cloudflare
-- Persistent storage: Supabase Postgres via REST
-- Optional API runtime when needed: Cloudflare-compatible edge/serverless function layer
+## Website
+- Production URL: `https://playmysubs.com`
+- Preview URL: `https://nova1-325.pages.dev`
 
-## Why This Stack
+## Static Hosting Constraints
+For the MVP website:
+- keep the website statically deployable
+- avoid Node server assumptions in the frontend
+- avoid deprecated provider-specific files and runtime wrappers
 
-- the site is static-first and fits Cloudflare Pages naturally
-- the domain already lives on Cloudflare
-- the current MVP does not require a permanent Node server
-- Supabase can still be reached over plain `fetch`
+## API Strategy
+The website already has a local backend reference implementation for:
+- `/api/license/verify`
+- `/api/webhooks/paddle`
 
-## Planned Public Endpoints
+Those routes are provider-agnostic and must remain Cloudflare-compatible.
 
-When same-domain API routes are turned back on, the expected endpoints remain:
+When live same-domain API routes are needed, use one of these approaches:
+1. Cloudflare-compatible worker/function routes under the Pages deployment
+2. Separate hosted API endpoint, with the website pointing to it explicitly
 
-- `POST /api/license/verify`
-- `POST /api/webhooks/paddle`
+## Storage
+Supabase remains the source of truth for:
+- license keys
+- transaction linkage
+- customer email mapping
+- fulfillment state
 
-## Required Environment Variables
-
-### Cloudflare Pages / Cloudflare-compatible runtime
-
-- `LICENSE_STORE_DRIVER=supabase`
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `SUPABASE_LICENSES_TABLE=licenses`
-- `PADDLE_WEBHOOK_SECRET`
-- `PADDLE_WEBHOOK_TOLERANCE_SECONDS=300`
-
-### Extension
-
-- `LICENSE_VERIFY_CONFIG.endpoint=https://playmysubs.com/api/license/verify`
-
-## Execution Checklist
-
-Follow:
-
-- [SETUP_CHECKLIST.md](/run/media/alesar/5a8d7f9b-81af-47dd-8912-95bc67eb6ecf/nova1/backend/SETUP_CHECKLIST.md)
-
-## Database
-
-Run the schema in:
-
-- [supabase-schema.sql](/run/media/alesar/5a8d7f9b-81af-47dd-8912-95bc67eb6ecf/nova1/backend/sql/supabase-schema.sql)
-
-## What Still Must Be Confirmed Before Production Payments
-
-1. real Paddle production approval
-2. one real end-to-end payment test
-3. webhook receipt in the live runtime
-4. license creation/update from the real Paddle event
-5. extension activation against the live verify endpoint
+## Immediate Goal
+Be ready so that once Paddle verification finishes, the only remaining work is:
+1. enable production checkout
+2. run a real purchase test
+3. verify webhook fulfillment end-to-end
+4. publish the extension on Chrome Web Store

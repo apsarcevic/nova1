@@ -1,59 +1,34 @@
-# PlayMySubs Backend Reference
+# PlayMySubs Backend Notes
 
-This folder contains the local backend reference for moving PlayMySubs from local premium preview into a real license-based product.
+This folder contains provider-agnostic backend reference code for:
+- license verification
+- Paddle webhook handling
+- local smoke testing
+- Supabase-backed license storage
 
-## Goal
+## Current Production Reality
+The website is hosted on Cloudflare Pages as a static site.
 
-The extension should verify a license key through a small backend contract instead of talking to a payment provider directly.
+That means this folder is currently used as:
+- implementation reference
+- local smoke-test harness
+- migration base for future live API deployment
 
-Planned responsibilities:
-- receive payment-provider fulfillment events
-- create or update a license record
-- verify whether a license key currently unlocks Premium
-- return the contract already documented in `MiniYoutube/LICENSE_API_CONTRACT.md`
+It is not currently deployed as a Node server behind the website.
 
-## Planned Routes
+## Production Direction
+Chosen stack:
+- Static site: `Cloudflare Pages`
+- DNS: `Cloudflare`
+- Storage: `Supabase`
+- Payments: `Paddle`
+- Future API runtime: Cloudflare-compatible function/worker layer or separate hosted API
 
-- `POST /api/license/verify`
-  - input: `licenseKey`, `product`, `version`
-  - output: `valid`, `plan`, `expiresAt`, `message`
-
-- `POST /api/webhooks/paddle`
-  - receives Paddle fulfillment events
-  - normalizes them into the local license record model
-
-## What This Reference Is
-
-- local Node modules with small handlers
-- pluggable storage driver:
-  - `file` for local testing
-  - `supabase` for production data
-- smoke script to simulate verify and webhook flows
-
-## What This Reference Is Not
-
-- not the current live Cloudflare runtime
-- not production storage by itself
-- not a deployed Pages Function or Worker yet
-
-## Local Files
-
-- `src/handlers/verifyLicense.js`: verify endpoint logic
-- `src/handlers/paddleWebhook.js`: provider event normalization + upsert flow
-- `src/lib/licenseStore.js`: runtime store selector
-- `src/lib/fileLicenseStore.js`: local JSON record adapter
-- `src/lib/supabaseLicenseStore.js`: Supabase REST adapter
-- `src/lib/licenseService.js`: shared business rules
-- `src/lib/paddle.js`: Paddle event normalization + signature verification
-- `PADDLE_WEBHOOK_EVENT_NOTES.md`: live webhook field assumptions
-- `sql/supabase-schema.sql`: starter schema for the production store
-- `data/licenses.json`: local test data
-- `scripts/smoke.js`: local smoke run
-- `DEPLOYMENT_PLAN.md`: Cloudflare-first deployment direction
-- `SETUP_CHECKLIST.md`: exact Cloudflare + Supabase execution checklist
-
-## Recommended Production Direction
-
-- static website on Cloudflare Pages
-- persistent license storage in Supabase
-- if same-domain API routes are needed, implement them in a Cloudflare-compatible runtime
+## Files
+- `src/handlers/verifyLicense.js`: license verification handler logic
+- `src/handlers/paddleWebhook.js`: webhook fulfillment logic
+- `src/lib/supabaseLicenseStore.js`: Supabase storage adapter
+- `scripts/smoke.js`: local smoke test
+- `PADDLE_WEBHOOK_EVENT_NOTES.md`: reference notes for Paddle events
+- `SETUP_CHECKLIST.md`: Cloudflare + Supabase setup checklist
+- `DEPLOYMENT_PLAN.md`: deployment architecture notes

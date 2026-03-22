@@ -1,34 +1,34 @@
 # PlayMySubs Website
 
-This repository contains the public PlayMySubs website and the local backend reference for Premium license verification.
+Marketing and checkout website for PlayMySubs.
 
-## Current Scope
+## Current Hosting
+- Production: `https://playmysubs.com`
+- Preview: `https://nova1-325.pages.dev`
+- Hosting: `Cloudflare Pages`
+- DNS: `Cloudflare`
 
-- static marketing pages for `playmysubs.com`
-- pricing, privacy, terms, refund, support, and about pages
-- Paddle checkout drawer on the website
-- local backend reference under `backend/` for license verification and webhook fulfillment
-- Cloudflare Pages as the hosting target for the site
+## Scope
+This repo contains the static website used for:
+- landing page
+- pricing page
+- legal pages
+- support page
+- Paddle checkout entry points
 
-## Hosting
+The site must stay compatible with Cloudflare Pages static hosting.
 
-Current production setup:
+## Deployment Rules
+- Do not reintroduce deprecated platform-specific hosting configs.
+- Do not add deprecated hosting config files.
+- Do not add deprecated provider-specific function wrappers.
+- Prefer static output for the MVP website.
+- Keep all production URLs aligned to `https://playmysubs.com`.
 
-- production: `https://playmysubs.com`
-- preview: `https://nova1-325.pages.dev`
-- hosting: Cloudflare Pages
-- DNS: Cloudflare
+## Checkout
+Frontend checkout is initialized from `paddle-config.js` and opened from the website UI.
 
-## Important Notes
+## Backend Notes
+The local `backend/` folder remains as an implementation reference for license verification and webhook handling. It is not a Node server deployment target for the current static Cloudflare Pages setup.
 
-- Netlify is deprecated for this project and should not be used again
-- do not add `netlify.toml` or Netlify-specific wrappers back into this repo
-- keep the website compatible with Cloudflare Pages static hosting
-- if same-domain API routes are needed later, use Cloudflare-compatible edge/serverless routing
-- `paddle-config.js` contains the current frontend checkout configuration
-
-## Local checks
-
-```bash
-node backend/scripts/smoke.js
-```
+If same-domain API routes are needed later, they should be implemented using Cloudflare-compatible runtime primitives, or by pointing the frontend to an external hosted API.
