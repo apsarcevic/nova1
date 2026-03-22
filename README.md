@@ -1,22 +1,31 @@
 # PlayMySubs Website
 
-This repository contains the public PlayMySubs marketing site and the first backend skeleton for Premium license verification.
+This repository contains the public PlayMySubs website and the local backend reference for Premium license verification.
 
 ## Current Scope
 
 - static marketing pages for `playmysubs.com`
 - pricing, privacy, terms, refund, support, and about pages
-- checkout drawer placeholder for the future Paddle flow
-- backend skeleton under `backend/` for license verification and webhook fulfillment
-- Netlify deployment skeleton for `/api/*` routes under `netlify/functions/`
+- Paddle checkout drawer on the website
+- local backend reference under `backend/` for license verification and webhook fulfillment
+- Cloudflare Pages as the hosting target for the site
+
+## Hosting
+
+Current production setup:
+
+- production: `https://playmysubs.com`
+- preview: `https://nova1-325.pages.dev`
+- hosting: Cloudflare Pages
+- DNS: Cloudflare
 
 ## Important Notes
 
-- the live checkout link is still not wired
-- the backend skeleton is local-first and file-backed for development only
-- the chosen production direction is Netlify Functions + Supabase REST
-- production still needs real Paddle webhook verification and real checkout wiring
-- `paddle-config.js` now contains the frontend checkout placeholders that still need a real Paddle `clientToken` and `priceId`
+- Netlify is deprecated for this project and should not be used again
+- do not add `netlify.toml` or Netlify-specific wrappers back into this repo
+- keep the website compatible with Cloudflare Pages static hosting
+- if same-domain API routes are needed later, use Cloudflare-compatible edge/serverless routing
+- `paddle-config.js` contains the current frontend checkout configuration
 
 ## Local checks
 

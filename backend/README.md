@@ -1,6 +1,6 @@
-# PlayMySubs Backend Skeleton
+# PlayMySubs Backend Reference
 
-This folder contains the minimal backend skeleton required to move PlayMySubs from local premium preview into a real license-based product.
+This folder contains the local backend reference for moving PlayMySubs from local premium preview into a real license-based product.
 
 ## Goal
 
@@ -22,20 +22,19 @@ Planned responsibilities:
   - receives Paddle fulfillment events
   - normalizes them into the local license record model
 
-## What This Skeleton Is
+## What This Reference Is
 
 - local Node modules with small handlers
 - pluggable storage driver:
   - `file` for local testing
-  - `supabase` for production deployment
+  - `supabase` for production data
 - smoke script to simulate verify and webhook flows
 
-## What This Skeleton Is Not
+## What This Reference Is Not
 
-- not production storage
-- not a deployed API
-- not final Paddle signature verification
-- not the final hosting decision
+- not the current live Cloudflare runtime
+- not production storage by itself
+- not a deployed Pages Function or Worker yet
 
 ## Local Files
 
@@ -45,44 +44,16 @@ Planned responsibilities:
 - `src/lib/fileLicenseStore.js`: local JSON record adapter
 - `src/lib/supabaseLicenseStore.js`: Supabase REST adapter
 - `src/lib/licenseService.js`: shared business rules
+- `src/lib/paddle.js`: Paddle event normalization + signature verification
+- `PADDLE_WEBHOOK_EVENT_NOTES.md`: live webhook field assumptions
 - `sql/supabase-schema.sql`: starter schema for the production store
 - `data/licenses.json`: local test data
 - `scripts/smoke.js`: local smoke run
-- `DEPLOYMENT_PLAN.md`: chosen production stack and rollout order
-- `SETUP_CHECKLIST.md`: exact Supabase + Netlify execution checklist
+- `DEPLOYMENT_PLAN.md`: Cloudflare-first deployment direction
+- `SETUP_CHECKLIST.md`: exact Cloudflare + Supabase execution checklist
 
-## Recommended Production Replacement
+## Recommended Production Direction
 
-Production should use `LICENSE_STORE_DRIVER=supabase` and the schema in `sql/supabase-schema.sql`.
-
-Suggested record shape:
-
-```json
-{
-  "licenseKey": "PMS-XXXX-XXXX",
-  "customerEmail": "user@example.com",
-  "plan": "premium",
-  "status": "active",
-  "expiresAt": null,
-  "provider": "paddle",
-  "providerCustomerId": "ctm_123",
-  "providerTransactionId": "txn_123",
-  "createdAt": "2026-03-18T10:00:00.000Z",
-  "updatedAt": "2026-03-18T10:00:00.000Z"
-}
-```
-
-## Local Smoke
-
-```bash
-cd nova1
-node backend/scripts/smoke.js
-```
-
-## Deployment Direction
-
-Current recommended stack:
-
-- Netlify static hosting
-- Netlify Functions for `/api/*`
-- Supabase Postgres via REST for persistent license storage
+- static website on Cloudflare Pages
+- persistent license storage in Supabase
+- if same-domain API routes are needed, implement them in a Cloudflare-compatible runtime

@@ -1,30 +1,31 @@
 # Deployment Plan
 
-This is the recommended production path for PlayMySubs right now.
+This is the current production direction for PlayMySubs.
 
 ## Chosen Stack
 
-- Static site: Netlify
-- Serverless API: Netlify Functions
+- Static site: Cloudflare Pages
+- DNS: Cloudflare
 - Persistent storage: Supabase Postgres via REST
+- Optional API runtime when needed: Cloudflare-compatible edge/serverless function layer
 
 ## Why This Stack
 
-- the current website is already a static site, so Netlify fits naturally
-- Netlify Functions lets the API live behind the same `playmysubs.com` domain
-- that avoids extra CORS complexity and keeps the public verify URL stable
-- Supabase can be used through plain `fetch`, so this repo does not need extra npm dependencies just to reach the database
+- the site is static-first and fits Cloudflare Pages naturally
+- the domain already lives on Cloudflare
+- the current MVP does not require a permanent Node server
+- Supabase can still be reached over plain `fetch`
 
 ## Planned Public Endpoints
+
+When same-domain API routes are turned back on, the expected endpoints remain:
 
 - `POST /api/license/verify`
 - `POST /api/webhooks/paddle`
 
-Netlify redirects these routes to the function wrappers in `netlify/functions/`.
-
 ## Required Environment Variables
 
-### Netlify
+### Cloudflare Pages / Cloudflare-compatible runtime
 
 - `LICENSE_STORE_DRIVER=supabase`
 - `SUPABASE_URL`
@@ -49,19 +50,10 @@ Run the schema in:
 
 - [supabase-schema.sql](/run/media/alesar/5a8d7f9b-81af-47dd-8912-95bc67eb6ecf/nova1/backend/sql/supabase-schema.sql)
 
-## What Still Must Be Implemented Before Production
+## What Still Must Be Confirmed Before Production Payments
 
-1. real Paddle signature verification in `backend/src/lib/paddle.js`
-2. mapping from actual Paddle webhook payloads to the local normalized event shape
-3. real checkout wiring in `main.js`
-4. set the real verify endpoint in the extension background config
-
-## Recommended Rollout Order
-
-1. Create Supabase project and `licenses` table.
-2. Add Netlify environment variables.
-3. Deploy the site with `netlify.toml`.
-4. Test `POST /api/license/verify` using the `file` driver first if needed, then switch to `supabase`.
-5. Implement and test real Paddle webhook verification.
-6. Wire Paddle checkout on the site.
-7. Point the extension to the production verify endpoint.
+1. real Paddle production approval
+2. one real end-to-end payment test
+3. webhook receipt in the live runtime
+4. license creation/update from the real Paddle event
+5. extension activation against the live verify endpoint
